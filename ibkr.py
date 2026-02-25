@@ -1,17 +1,21 @@
+import threading
+import time
+
 from ibapi.client import EClient
 from ibapi.wrapper import EWrapper
 from ibapi.contract import Contract
 
-import threading
-import time
+preturn = 0
 
 class IBapi(EWrapper, EClient):
 	def __init__(self):
 		EClient.__init__(self, self)
 	def tickPrice(self, reqId, tickType, price, attrib):
-		if tickType == 2 and reqId == 1:
-			print('Current USD/CNH pair: ', price)
+		global preturn
 
+		if tickType == 2 and reqId == 1:
+			preturn = price
+	
 def run_loop():
 	app.run()
 
@@ -34,5 +38,5 @@ eurusd_contract.currency = 'CNH'
 #Request Market Data
 app.reqMktData(1, eurusd_contract, '', False, False, [])
 
-time.sleep(5) #Sleep interval to allow time for incoming price data
+time.sleep(3) #Sleep interval to allow time for incoming price data
 app.disconnect()

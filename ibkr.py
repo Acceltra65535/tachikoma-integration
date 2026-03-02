@@ -20,7 +20,7 @@ def run_loop():
 	app.run()
 
 app = IBapi()
-app.connect('127.0.0.1', 4002, 887888)
+app.connect('N/A', 4002, 887888)
 
 #Start the socket in a thread
 api_thread = threading.Thread(target=run_loop, daemon=True)
